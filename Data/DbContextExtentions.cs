@@ -13,10 +13,10 @@ namespace ASP.Data
         {
             var user = new AppUser
             {
-                FirstName = "Stu",
-                LastName = "Ratcliffe",
-                UserName = "stu@ratcliffe.io",
-                Email = "stu@ratcliffe.io",
+                FirstName = "James",
+                LastName = "Smith",
+                UserName = "jsmith@jamesemail.com",
+                Email = "jsmith@jamesemail.com",
                 EmailConfirmed = true,
                 LockoutEnabled = false
             };
