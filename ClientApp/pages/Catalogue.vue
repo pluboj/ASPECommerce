@@ -1,5 +1,7 @@
 <template>
-    <product-list :products="products" />
+    <div class="page">
+        <product-list :products="products" />
+    </div>
 </template>
 
 <script>
@@ -15,13 +17,13 @@ export default {
         }
     },
     mounted() {
-        fetch("/api/products")
-            .then(response => {
-                return response.json();
-            })
-            .then(products => {
-                this.products = products;
-            })
+    fetch("/api/products")
+        .then(response => {
+            return response.json();
+        })
+        .then(products => {
+            this.products = products;
+        })
     }
 }
 </script>
