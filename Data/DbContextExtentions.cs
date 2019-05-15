@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using ASP.Data.Entities;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASP.Data
 {
@@ -27,6 +29,72 @@ namespace ASP.Data
             AddProducts(context);
         }
 
+        private static void AddColoursFeaturesAndStorage(Context context)
+        {
+            if (context.Colours.Any() == false)
+            {
+                var colours = new List<string>() { "Black", "White", "Gold", "Silver", "Grey", "Spacegrey", "Red", "Pink" };
+
+                colours.ForEach(c => context.Add(new Colour
+                {
+                Name = c
+                }));
+
+                context.SaveChanges();
+            }
+
+            if (context.Features.Any() == false)
+            {
+                var features = new List<string>() { "3G", "4G", "Bluetooth", "WiFi", "Fast charge", "GPS", "NFC" };
+
+                features.ForEach(f => context.Add(new Feature
+                {
+                Name = f
+                }));
+
+                context.SaveChanges();
+            }
+
+            if (context.Storage.Any() == false)
+            {
+                var storage = new List<int>() { 4, 8, 16, 32, 64, 128, 256 };
+
+                storage.ForEach(s => context.Storage.Add(new Storage
+                {
+                Capacity = s
+                }));
+
+                context.SaveChanges();
+            }
+        }
+
+        private static void AddOperatingSystemsAndBrands(Context context)
+        {
+            if (context.OS.Any() == false)
+            {
+                var os = new List<string>() { "Android", "iOS", "Windows" };
+
+                os.ForEach(o => context.OS.Add(new OS
+                {
+                Name = o
+                }));
+
+                context.SaveChanges();
+            }
+
+            if (context.Brands.Any() == false)
+            {
+                var brands = new List<string>() { "Acme", "Globex", "Soylent", "Initech", "Umbrella" };
+
+                brands.ForEach(b => context.Brands.Add(new Brand
+                {
+                Name = b
+                }));
+
+                context.SaveChanges();
+            }
+        }
+
         public static void AddProducts(Context context)
         {
             if ( context.Products.Any() == false )
@@ -35,125 +103,43 @@ namespace ASP.Data
                 {
                     new Product
                     {
-                        Name= "Samsung Galaxy S8",
-                        Slug= "samsung-galaxy-s8",
-                        Thumbnail= "http://placehold.it/200x300",
-                        ShortDescription=
+                        Name = "Samsung Galaxy S8",
+                        Slug = "samsung-galaxy-s8",
+                        Thumbnail = "http://placehold.it/200x300",
+                        ShortDescription =
                             "Samsung Galaxy S8 Android smartphone with true edge to edge display",
-                        Price= 499.99M,
-                        Description=
-                            "Lorem ipsum dolor sit amet consectetur adipisicing elit." + 
-                            "Perferendis tempora ad cum laudantium, omnis fugit amet iure animi corporis "+
-                            "labore repellat magnam perspiciatis explicabo maiores fuga provident a obcaecati "+
-                            "tenetur nostrum, quidem quod dignissimos, voluptatem quasi? Nisi quaerat, fugit "+
-                            "voluptas ducimus facilis impedit quod dicta, laborum sint iure nihil veniam aspernatur "+
-                            "delectus officia culpa, at cupiditate? Totam minima ut deleniti laboriosam dolores cumque in, "+
-                            "nesciunt optio! Quod recusandae voluptate facere pariatur soluta vel corrupti "+
-                            "tenetur aut maiores, cumque mollitia fugiat laudantium error odit voluptas nobis "+
-                            "laboriosam quo, rem deleniti? Iste quidem amet perferendis sed iusto tempora modi "+
-                            "illo tempore quibusdam laborum? Dicta aliquam libero, facere, maxime corporis qui "+
-                            "officiis explicabo aspernatur non consequatur mollitia iure magnam odit enim. Eligendi "+
-                            "suscipit, optio officiis repellat eos quis iure? Omnis, error aliquid quibusdam iste "+
-                            "amet nihil nisi cumque magni sequi enim illo autem nesciunt optio accusantium animi "+
-                            "commodi tenetur neque eum vitae est."
-                    },
-                    new Product
-                    {
-                        Name= "Samsung Galaxy S7",
-                        Slug= "samsung-galaxy-s7",
-                        Thumbnail= "http://placehold.it/200x300",
-                        ShortDescription=
-                            "Samsung Galaxy S7 Android smartphone with true edge to edge display",
-                        Price= 399.99M,
-                        Description=
-                            "Lorem ipsum dolor sit amet consectetur adipisicing elit." + 
-                            "Perferendis tempora ad cum laudantium, omnis fugit amet iure animi corporis "+
-                            "labore repellat magnam perspiciatis explicabo maiores fuga provident a obcaecati "+
-                            "tenetur nostrum, quidem quod dignissimos, voluptatem quasi? Nisi quaerat, fugit "+
-                            "voluptas ducimus facilis impedit quod dicta, laborum sint iure nihil veniam aspernatur "+
-                            "delectus officia culpa, at cupiditate? Totam minima ut deleniti laboriosam dolores cumque in, "+
-                            "nesciunt optio! Quod recusandae voluptate facere pariatur soluta vel corrupti "+
-                            "tenetur aut maiores, cumque mollitia fugiat laudantium error odit voluptas nobis "+
-                            "laboriosam quo, rem deleniti? Iste quidem amet perferendis sed iusto tempora modi "+
-                            "illo tempore quibusdam laborum? Dicta aliquam libero, facere, maxime corporis qui "+
-                            "officiis explicabo aspernatur non consequatur mollitia iure magnam odit enim. Eligendi "+
-                            "suscipit, optio officiis repellat eos quis iure? Omnis, error aliquid quibusdam iste "+
-                            "amet nihil nisi cumque magni sequi enim illo autem nesciunt optio accusantium animi "+
-                            "commodi tenetur neque eum vitae est."
-                    },
-                    new Product
-                    {
-                        Name= "Samsung Galaxy S6",
-                        Slug= "samsung-galaxy-s6",
-                        Thumbnail= "http://placehold.it/200x300",
-                        ShortDescription=
-                            "Samsung Galaxy S6 Android smartphone with true edge to edge display",
-                        Price= 299.99M,
-                        Description=
-                            "Lorem ipsum dolor sit amet consectetur adipisicing elit." + 
-                            "Perferendis tempora ad cum laudantium, omnis fugit amet iure animi corporis "+
-                            "labore repellat magnam perspiciatis explicabo maiores fuga provident a obcaecati "+
-                            "tenetur nostrum, quidem quod dignissimos, voluptatem quasi? Nisi quaerat, fugit "+
-                            "voluptas ducimus facilis impedit quod dicta, laborum sint iure nihil veniam aspernatur "+
-                            "delectus officia culpa, at cupiditate? Totam minima ut deleniti laboriosam dolores cumque in, "+
-                            "nesciunt optio! Quod recusandae voluptate facere pariatur soluta vel corrupti "+
-                            "tenetur aut maiores, cumque mollitia fugiat laudantium error odit voluptas nobis "+
-                            "laboriosam quo, rem deleniti? Iste quidem amet perferendis sed iusto tempora modi "+
-                            "illo tempore quibusdam laborum? Dicta aliquam libero, facere, maxime corporis qui "+
-                            "officiis explicabo aspernatur non consequatur mollitia iure magnam odit enim. Eligendi "+
-                            "suscipit, optio officiis repellat eos quis iure? Omnis, error aliquid quibusdam iste "+
-                            "amet nihil nisi cumque magni sequi enim illo autem nesciunt optio accusantium animi "+
-                            "commodi tenetur neque eum vitae est."
-                    },
-                    new Product
-                    {
-                        Name= "Samsung Galaxy S5",
-                        Slug= "samsung-galaxy-s5",
-                        Thumbnail= "http://placehold.it/200x300",
-                        ShortDescription=
-                            "Samsung Galaxy S5 Android smartphone with true edge to edge display",
-                        Price= 199.99M,
-                        Description=
-                            "Lorem ipsum dolor sit amet consectetur adipisicing elit." + 
-                            "Perferendis tempora ad cum laudantium, omnis fugit amet iure animi corporis "+
-                            "labore repellat magnam perspiciatis explicabo maiores fuga provident a obcaecati "+
-                            "tenetur nostrum, quidem quod dignissimos, voluptatem quasi? Nisi quaerat, fugit "+
-                            "voluptas ducimus facilis impedit quod dicta, laborum sint iure nihil veniam aspernatur "+
-                            "delectus officia culpa, at cupiditate? Totam minima ut deleniti laboriosam dolores cumque in, "+
-                            "nesciunt optio! Quod recusandae voluptate facere pariatur soluta vel corrupti "+
-                            "tenetur aut maiores, cumque mollitia fugiat laudantium error odit voluptas nobis "+
-                            "laboriosam quo, rem deleniti? Iste quidem amet perferendis sed iusto tempora modi "+
-                            "illo tempore quibusdam laborum? Dicta aliquam libero, facere, maxime corporis qui "+
-                            "officiis explicabo aspernatur non consequatur mollitia iure magnam odit enim. Eligendi "+
-                            "suscipit, optio officiis repellat eos quis iure? Omnis, error aliquid quibusdam iste "+
-                            "amet nihil nisi cumque magni sequi enim illo autem nesciunt optio accusantium animi "+
-                            "commodi tenetur neque eum vitae est."
-                    },
-                    new Product
-                    {
-                        Name= "Samsung Galaxy S4",
-                        Slug= "samsung-galaxy-s4",
-                        Thumbnail= "http://placehold.it/200x300",
-                        ShortDescription=
-                            "Samsung Galaxy S4 Android smartphone with true edge to edge display",
-                        Price= 99.99M,
-                        Description=
-                            "Lorem ipsum dolor sit amet consectetur adipisicing elit." + 
-                            "Perferendis tempora ad cum laudantium, omnis fugit amet iure animi corporis "+
-                            "labore repellat magnam perspiciatis explicabo maiores fuga provident a obcaecati "+
-                            "tenetur nostrum, quidem quod dignissimos, voluptatem quasi? Nisi quaerat, fugit "+
-                            "voluptas ducimus facilis impedit quod dicta, laborum sint iure nihil veniam aspernatur "+
-                            "delectus officia culpa, at cupiditate? Totam minima ut deleniti laboriosam dolores cumque in, "+
-                            "nesciunt optio! Quod recusandae voluptate facere pariatur soluta vel corrupti "+
-                            "tenetur aut maiores, cumque mollitia fugiat laudantium error odit voluptas nobis "+
-                            "laboriosam quo, rem deleniti? Iste quidem amet perferendis sed iusto tempora modi "+
-                            "illo tempore quibusdam laborum? Dicta aliquam libero, facere, maxime corporis qui "+
-                            "officiis explicabo aspernatur non consequatur mollitia iure magnam odit enim. Eligendi "+
-                            "suscipit, optio officiis repellat eos quis iure? Omnis, error aliquid quibusdam iste "+
-                            "amet nihil nisi cumque magni sequi enim illo autem nesciunt optio accusantium animi "+
-                            "commodi tenetur neque eum vitae est."
+                        Description = "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+                        ScreenSize = 5M,
+                        TalkTime = 8M,
+                        StandbyTime = 36M,
+                        Brand = context.Brands.Single(b => b.Name == "Acme"),
+                        OS = context.OS.Single(os => os.Name == "Android"),
+                        Images = new List<Image>
+                        {
+                            new Image { Url = "/assets/images/gallery1.jpeg" },
+                            new Image { Url = "/assets/images/gallery2.jpeg" },
+                            new Image { Url = "/assets/images/gallery3.jpeg" },
+                            new Image { Url = "/assets/images/gallery4.jpeg" },
+                            new Image { Url = "/assets/images/gallery5.jpeg" },
+                            new Image { Url = "/assets/images/gallery6.jpeg" }
+                        },
+                        ProductFeatures = new List<ProductFeature>
+                        {
+                            new ProductFeature
+                            {
+                                Feature = context.Features.Single(f => f.Name == "GPS")
+                            }
+                        },
+                        ProductVariants = new List<ProductVariant>
+                        {
+                            new ProductVariant
+                            {
+                                Colour = context.Colours.Single(c => c.Name == "Gold"),
+                                Storage = context.Storage.Single(s => s.Capacity == 64),
+                                Price = 369M
+                            }
+                        }
                     }
-                
                 };
 
                 context.Products.AddRange(products);
