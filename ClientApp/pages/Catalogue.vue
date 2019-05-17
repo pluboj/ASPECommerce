@@ -1,19 +1,36 @@
 <template>
-    <div class="page">
-        <product-list :products="products" />
-    </div>
+    <b-container fluid class="page">
+        <b-row>
+        <b-col cols="3">
+            <filters :filters="filters" />
+        </b-col>
+        <b-col cols="9">
+            <product-list :products="products" />
+        </b-col>
+        </b-row>
+    </b-container>
 </template>
 
 <script>
 import ProductList from '../components/catalogue/ProductList.vue';
+import Filters from "../components/catalogue/Filters.vue";
+
 export default {
     name: 'catalogue',
     components: {
-        ProductList
+        ProductList,
+        Filters
     },
     data () {
         return {
-            products: []
+            products: [],
+            filters: {
+                brands: [],
+                capacity: [],
+                colours: [],
+                os: [],
+                features: []
+            }
         }
     },
     mounted() {

@@ -14,7 +14,7 @@ module.exports = (env) => {
                 'bootstrap-vue',
                 'bootstrap/dist/css/bootstrap.css',
                 'event-source-polyfill',
-                'isomorphic-fetch',
+                'axios',
                 'vue',
                 'vue-router',
                 'nprogress/nprogress.css'
